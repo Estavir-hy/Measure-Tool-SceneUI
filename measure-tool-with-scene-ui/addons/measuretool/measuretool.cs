@@ -167,7 +167,7 @@ public partial class measuretool : EditorPlugin
 
 		if(NodesNum == 0)
 		{
-			return;
+			ui.SetInfoText("No Node3D selected.\nSelect one object to inspect it,\nor two to measure the distance between them.");
 		}
 		else if(NodesNum ==1)
 		{
