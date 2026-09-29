@@ -192,6 +192,9 @@ public partial class measuretool : EditorPlugin
 			ui.SetInfoText("Selected too many nodes");
 		}
 
+		if (NodesNum != 2)
+    		ui.SetDistanceText("Distance: -");
+
 		ui.SetMeasureButtonEnabled(NodesNum == 2);
 
 	}
@@ -260,7 +263,7 @@ public partial class measuretool : EditorPlugin
 		
 		measurements.Add(new Measurement
 		{
-			Name = fileName,
+			Name = candidate,
 			NodenameA = nameA,
 			NodenameB = nameB,
 			vecPointA = measuredA,
@@ -273,6 +276,7 @@ public partial class measuretool : EditorPlugin
 
 	public void RemoveMeasurement(int index)
 	{
+		if (index < 0 || index >= measurements.Count) return;
 		measurements.RemoveAt(index);
 		selectedIndex = -1;
 		ui.RefreshMeasurementList(measurements);
@@ -301,6 +305,13 @@ public partial class measuretool : EditorPlugin
 
 		ui.ShowDetails(m.Name, m.NodenameA, m.vecPointA, m.NodenameB, m.vecPointB,
 			m.Distance, m.Vector, m.Direction, equation);
+	}
+
+	public void ClearSelection()
+	{
+		selectedIndex = -1;
+		hasMeasurement = true;    // 之前若因选中"同一条"让黄线让了位,取消点选后恢复显示
+		ui.ClearDetails();
 	}
 
 

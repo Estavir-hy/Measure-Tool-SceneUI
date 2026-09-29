@@ -14,7 +14,7 @@ public partial class MeasureToolUi : Control
 	[Export] ItemList measurementList;
 	[Export] Button removeButton;
 	[Export] Button clearAllButton;
-	[Export] Label detailsLabel;
+	[Export] RichTextLabel detailsLabel;
 
 
 	public void SetInfoText(string text) => infoLabel.Text = text;
@@ -33,6 +33,7 @@ public partial class MeasureToolUi : Control
 		removeButton.Pressed += OnRemovePressed;
 		clearAllButton.Pressed += OnClearAllPressed;
 		measurementList.ItemSelected += OnListItemSelected;
+		measurementList.EmptyClicked += OnListEmptyClicked;
     }
 
 	public void RefreshMeasurementList(List<Measurement> measurements)
@@ -48,13 +49,20 @@ public partial class MeasureToolUi : Control
 		Vector3 pointB, float distance, Vector3 vector, Vector3 direction, string equation)
 	{
 		detailsLabel.Text =
-			$"[{name}]\n" +
+			$"[{name}]\n\n" +
+			"<Math informations>\n\n" +
 			$"A: {nodeAName}  ({pointA.X:F2}, {pointA.Y:F2}, {pointA.Z:F2})\n" +
-			$"B: {nodeBName}  ({pointB.X:F2}, {pointB.Y:F2}, {pointB.Z:F2})\n" +
-			$"Distance: {distance:F3}\n" +
-			$"Vector (B - A): ({vector.X:F2}, {vector.Y:F2}, {vector.Z:F2})\n" +
-			$"Unit direction: ({direction.X:F2}, {direction.Y:F2}, {direction.Z:F2})\n" +
-			"Line equation:\n" + equation;
+			$"B: {nodeBName}  ({pointB.X:F2}, {pointB.Y:F2}, {pointB.Z:F2})\n\n" +
+			$"Distance: {distance:F3}\n\n" +
+			$"Vector (B - A): ({vector.X:F2}, {vector.Y:F2}, {vector.Z:F2})\n\n" +
+			$"Unit direction: ({direction.X:F2}, {direction.Y:F2}, {direction.Z:F2})\n\n" +
+			$"Line equation:\n{equation}\n\n" +
+			"<Code informations>\n\n" +
+			$"Vector3 a = new Vector3({pointA.X:F4}f, {pointA.Y:F4}f, {pointA.Z:F4}f);\n" +
+			$"Vector3 b = new Vector3({pointB.X:F4}f, {pointB.Y:F4}f, {pointB.Z:F4}f);\n" +
+			$"Vector3 dir = (b - a).Normalized();\n" +
+			$"float dist = (b - a).Length();\n" +
+			$"// P(t) = a + t * dir, t in [0, 1]";
 	}
 
 	private void OnMeasurePressed()
@@ -89,6 +97,13 @@ public partial class MeasureToolUi : Control
 		if (measureTool == null) return;
 		removeButton.Disabled = false;
 		measureTool.SelectMeasurementForDetails((int)index);
+	}
+
+	private void OnListEmptyClicked(Vector2 atPosition, long mouseButtonIndex)
+	{
+		if (measureTool == null) return;
+		removeButton.Disabled = true;
+		measureTool.ClearSelection();
 	}
 
 }

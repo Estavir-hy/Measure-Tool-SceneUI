@@ -40,7 +40,7 @@ saveButton = NodePath("Margin/VBox/SaveRow/saveButton")
 measurementList = NodePath("Margin/VBox/ListPanel/measurementList")
 removeButton = NodePath("Margin/VBox/ListButtonRow/removeButton")
 clearAllButton = NodePath("Margin/VBox/ListButtonRow/clearAllButton")
-detailsLabel = NodePath("Margin/VBox/DetailsPanel/derailsLabel")
+detailsLabel = NodePath("Margin/VBox/DetailsPanel/detailsLabel")
 
 [node name="Margin" type="MarginContainer" parent="." unique_id=270672934]
 layout_mode = 1
@@ -128,6 +128,9 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_dh3yy")
 
-[node name="derailsLabel" type="Label" parent="Margin/VBox/DetailsPanel" unique_id=1428989901]
+[node name="detailsLabel" type="RichTextLabel" parent="Margin/VBox/DetailsPanel" unique_id=2048868210]
 layout_mode = 2
+focus_mode = 2
+theme_override_font_sizes/normal_font_size = 24
 text = "Select a saved measurement to see its details."
+selection_enabled = true
