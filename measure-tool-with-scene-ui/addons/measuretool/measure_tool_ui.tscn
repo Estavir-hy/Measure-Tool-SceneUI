@@ -1,0 +1,133 @@
+[gd_scene format=3 uid="uid://bfrwvhqyiutb6"]
+
+[ext_resource type="Script" uid="uid://dox86p15icrrp" path="res://addons/measuretool/MeasureToolUi.cs" id="1_r4o8o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iid7o"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0, 0, 0, 0.35686275)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dh3yy"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.12941177, 0.12941177, 0.14901961, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="MeasureToolUI" type="Control" unique_id=459422919 node_paths=PackedStringArray("infoLabel", "DistanceLabel", "measureButton", "nameEdit", "saveButton", "measurementList", "removeButton", "clearAllButton", "detailsLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r4o8o")
+infoLabel = NodePath("Margin/VBox/infoLabel")
+DistanceLabel = NodePath("Margin/VBox/distanceLabel")
+measureButton = NodePath("Margin/VBox/measureButton")
+nameEdit = NodePath("Margin/VBox/SaveRow/nameEdit")
+saveButton = NodePath("Margin/VBox/SaveRow/saveButton")
+measurementList = NodePath("Margin/VBox/ListPanel/measurementList")
+removeButton = NodePath("Margin/VBox/ListButtonRow/removeButton")
+clearAllButton = NodePath("Margin/VBox/ListButtonRow/clearAllButton")
+detailsLabel = NodePath("Margin/VBox/DetailsPanel/derailsLabel")
+
+[node name="Margin" type="MarginContainer" parent="." unique_id=270672934]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 9.0
+offset_right = -9.0
+offset_bottom = -9.0
+
+[node name="VBox" type="VBoxContainer" parent="Margin" unique_id=1017032366]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="Margin/VBox" unique_id=1103783815]
+layout_mode = 2
+text = "Measure Tool"
+horizontal_alignment = 1
+
+[node name="infoLabel" type="Label" parent="Margin/VBox" unique_id=274248934]
+layout_mode = 2
+text = "No Node3D selected.
+Select one object to inspect it,
+or two to measure the distance between them."
+
+[node name="measureButton" type="Button" parent="Margin/VBox" unique_id=582628172]
+layout_mode = 2
+disabled = true
+text = "Measure"
+
+[node name="distanceLabel" type="Label" parent="Margin/VBox" unique_id=1835918834]
+layout_mode = 2
+text = "Distance: -"
+
+[node name="HSeparator" type="HSeparator" parent="Margin/VBox" unique_id=1887329316]
+layout_mode = 2
+
+[node name="SaveRow" type="HBoxContainer" parent="Margin/VBox" unique_id=87159725]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="nameEdit" type="LineEdit" parent="Margin/VBox/SaveRow" unique_id=1103383644]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Measurement name"
+
+[node name="saveButton" type="Button" parent="Margin/VBox/SaveRow" unique_id=526371941]
+layout_mode = 2
+disabled = true
+text = "Save"
+
+[node name="ListLabel" type="Label" parent="Margin/VBox" unique_id=594013395]
+layout_mode = 2
+text = "Saved Measurements"
+
+[node name="ListPanel" type="PanelContainer" parent="Margin/VBox" unique_id=286857018]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_iid7o")
+
+[node name="measurementList" type="ItemList" parent="Margin/VBox/ListPanel" unique_id=2076327356]
+layout_mode = 2
+
+[node name="ListButtonRow" type="HBoxContainer" parent="Margin/VBox" unique_id=710642604]
+layout_mode = 2
+
+[node name="removeButton" type="Button" parent="Margin/VBox/ListButtonRow" unique_id=447486950]
+layout_mode = 2
+disabled = true
+text = "Remove Selected"
+
+[node name="clearAllButton" type="Button" parent="Margin/VBox/ListButtonRow" unique_id=1253788675]
+layout_mode = 2
+text = "Clear All"
+
+[node name="HSeparator2" type="HSeparator" parent="Margin/VBox" unique_id=1448401480]
+layout_mode = 2
+
+[node name="DetailsLabelHeader" type="Label" parent="Margin/VBox" unique_id=863016682]
+layout_mode = 2
+text = "Details"
+
+[node name="DetailsPanel" type="PanelContainer" parent="Margin/VBox" unique_id=75821823]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_dh3yy")
+
+[node name="derailsLabel" type="Label" parent="Margin/VBox/DetailsPanel" unique_id=1428989901]
+layout_mode = 2
+text = "Select a saved measurement to see its details."
